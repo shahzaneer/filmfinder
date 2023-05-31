@@ -1,7 +1,6 @@
-class RoutesNames{
-  //! This is only used for naming the routes for navigation
-  static const String home = '/';
-  static const String movieDetails = '/movieDetails';
-  static const String search = '/search';
-  static const String watchlist = '/watchlist';
+class RoutesNames {
+  //! This is only used for naming the routes for Routing
+  static const String movieHome = 'home';
+  static const String movieDetails = 'details';
+  static const String movieTicket = 'ticket';
 }

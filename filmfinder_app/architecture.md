@@ -1,4 +1,4 @@
-# MVVM ARCHITECTURE
+# MVVM ARCHITECTURE followed for FilmFinder
 
 ---
 
@@ -14,16 +14,26 @@
 
 - All the Screens will be present here.
 
+### {name}\_screen
+
+- Main folder for a specific Screen
+
+#### {name}\_screen.dart
+
+#### widgets
+
+- It will contain the widgets specifically required by the class
+
 ## View Model:
 
 - It will contain state management classes and the logic that connects the UI(view) with the original data(View Model)
 - `BLoc` for large projects including a lot of Data Streams and Events
 - `Cubit` for large projects but with slightly less control WRT `Bloc`
-- `Provider` Considerably small Projects.
+- `Provider` Considerably small Projects. `I HAVE USED THIS`
 
 ## Widgets:
 
-- It will contain all the components.
+- It will contain all the global components which are used excessively in app.
 
 ## Utils:
 
@@ -52,3 +62,7 @@
 ### Repository:
 
 - It will actually link the network with models according to the services required that is the original business logic code.
+
+## Local Storage:
+
+It will contain the local Storage Code

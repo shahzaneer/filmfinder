@@ -1,8 +1,18 @@
+import 'package:filmfinder_app/routes/route_names.dart';
 import 'package:flutter/material.dart';
+import '../views/movie_detail_screen/movie_detail_screen.dart';
+import '../views/movie_home_screen/movie_home_screen.dart';
+import '../views/movie_ticket_screen/movie_ticket_screen.dart';
 
 class Routes {
   static Route<dynamic> generateRoutes(RouteSettings settings) {
     switch (settings.name) {
+      case RoutesNames.movieHome:
+        return MaterialPageRoute(builder: (context) => MovieHomeScreen());
+      case RoutesNames.movieDetails:
+        return MaterialPageRoute(builder: (context) => MovieDetailsScreen());
+      case RoutesNames.movieTicket:
+        return MaterialPageRoute(builder: (context) => MovieTicketScreen());
       default:
         return MaterialPageRoute(
           builder: (context) {
