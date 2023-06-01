@@ -9,8 +9,8 @@ import 'package:http/http.dart' as http;
 class ApiService extends BaseApiServices {
   // GET REQUEST
   @override
-  Future<dynamic> get(String? searchedQuery,
-      {required endPoints givenEndPoint}) async {
+  Future<dynamic> get({String? movieId, String? searchedQuery,
+      required endPoints givenEndPoint}) async {
     final String url;
     if (searchedQuery != null) {
       url = ApiUrls.dynamicUrlMaker(

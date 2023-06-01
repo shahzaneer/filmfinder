@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
 
-class MovieProvider with ChangeNotifier{
-  
-}
+// This class will provide the data to the UI i.e. It is serving as the viewModel Class
+// It will be used to notify the UI about the changes in the data
+class MovieProvider with ChangeNotifier {}

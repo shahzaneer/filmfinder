@@ -11,7 +11,9 @@ class ApiUrls {
 // using String interpolation to Make the Url work Dynamically
 // Everytime we need to make a network call we will call this method
   static String dynamicUrlMaker(
-      {String? searchedQuery, required endPoints selectedEndPoint}) {
+      {String? searchedQuery,
+      String? movieId,
+      required endPoints selectedEndPoint}) {
     switch (selectedEndPoint) {
       case endPoints.movieList:
         return "$_baseurl$_movieList?api_key=$_apiKey&language=en-US&page=$_pageNo";
@@ -19,6 +21,8 @@ class ApiUrls {
         return "$_baseurl$_movieSearch?query=$searchedQuery&include_adult=false&language=en-US&page=$_pageNo";
       case endPoints.movieGenre:
         return "$_baseurl$_movieGenre?api_key=$_apiKey&language=en";
+      case endPoints.movieTrailer:
+        return "$_baseurl/3/movie$movieId/videos?api_key=$_apiKey&language=en-US";
       default:
         return "$_baseurl$_movieList?api_key=$_apiKey&language=en-US&page=$_pageNo";
     }

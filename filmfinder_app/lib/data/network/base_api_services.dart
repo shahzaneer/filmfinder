@@ -1,8 +1,8 @@
-
 import 'end_points.dart';
 
-abstract class BaseApiServices{
-  Future<dynamic> get(String? searchedQuery,{required endPoints givenEndPoint});
+abstract class BaseApiServices {
+  Future<dynamic> get({String? movieId, String? searchedQuery,
+      required endPoints givenEndPoint});
   // Future<dynamic> post(String url, dynamic body);
   //Future<dynamic> put(String url, dynamic body);
   //Future<dynamic> delete(String url);
