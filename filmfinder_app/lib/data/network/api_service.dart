@@ -1,13 +1,23 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:filmfinder_app/data/exceptions/app_exceptions.dart';
+import 'package:filmfinder_app/data/network/api_urls.dart';
 import 'package:filmfinder_app/data/network/base_api_services.dart';
+import 'package:filmfinder_app/data/network/end_points.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService extends BaseApiServices {
   // GET REQUEST
   @override
-  Future<dynamic> get(String url) async {
+  Future<dynamic> get(String? searchedQuery,
+      {required endPoints givenEndPoint}) async {
+    final String url;
+    if (searchedQuery != null) {
+      url = ApiUrls.dynamicUrlMaker(
+          searchedQuery: searchedQuery, selectedEndPoint: givenEndPoint);
+    } else {
+      url = ApiUrls.dynamicUrlMaker(selectedEndPoint: givenEndPoint);
+    }
     dynamic response;
     try {
       response = await http.get(Uri.parse(url));
@@ -20,6 +30,8 @@ class ApiService extends BaseApiServices {
 //! This Method is used to handle the different type of responses from the server
   dynamic responseStatusHandler(http.Response response) {
     switch (response.statusCode) {
+      // By Reading the Api Documentation
+      // We can better handle the different types of status codes we receive!
       case 200:
         // 200 -> OK: it means we got the response so we will return it
         return jsonDecode(response.body);
@@ -28,10 +40,17 @@ class ApiService extends BaseApiServices {
         return "new Resource Created";
       case 400:
         // 400 -> Bad Request: it means the request was invalid or cannot be served. An accompanying error message will explain further.
-        throw BadRequestException(response.reasonPhrase);
+        throw BadRequestException(
+            "Invalid page: Pages start at 1 and max at 1000. They are expected to be an integer.");
+      case 401:
+        return "invalid Api Key";
       default:
         throw InternetException(
             "${response.statusCode} : ${response.reasonPhrase}");
     }
   }
+}
+
+void main(List<String> args) {
+  // Testing purposes
 }
