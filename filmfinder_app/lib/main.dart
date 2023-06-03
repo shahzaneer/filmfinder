@@ -1,9 +1,28 @@
+import 'package:filmfinder_app/models/movie_model.dart';
+import 'package:filmfinder_app/routes/route_names.dart';
+import 'package:filmfinder_app/routes/routes.dart';
+import 'package:filmfinder_app/utils/coloors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hive/hive.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:fast_cached_network_image/fast_cached_network_image.dart';
 
-void main() {
-  //! For Device Orientation Support
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // Make a directory for hive Data
+  var directory = await getApplicationDocumentsDirectory();
+  // Initialize hive
+  Hive.init(directory.path);
+  // You have to register that generated adapter
+  Hive.registerAdapter(MovieModelAdapter());
+  // Open a box (yeh aik database hai)
+  await Hive.openBox<MovieModel>('movies');
+//  Local Storage for FastCachedImage (it is also using Hive)
+  String storageLocation = (await getApplicationDocumentsDirectory()).path;
+  await FastCachedImageConfig.init(
+      subDir: storageLocation, clearCacheAfter: const Duration(days: 15));
+  //! For Device Orientation Support
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.landscapeLeft,
@@ -20,13 +39,10 @@ class FilmFinderApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: Container(
-        color: Colors.deepPurple,
-      ),
+      theme: Coolors.filmFinderTheme,
+      debugShowCheckedModeBanner: false,
+      initialRoute: RoutesNames.movieHome,
+      onGenerateRoute:Routes.generateRoutes,
     );
   }
 }

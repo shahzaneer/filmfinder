@@ -1,12 +1,22 @@
 import 'dart:convert';
+import "package:hive/hive.dart";
+part 'movie_model.g.dart';
 
-class MovieModel {
+@HiveType(typeId: 0)
+class MovieModel extends HiveObject {
+  @HiveField(0)
   final String id;
+  @HiveField(1)
   final String originalTitle;
+  @HiveField(2)
   final String? backdropPath;
+  @HiveField(3)
   final String? releaseDate;
+  @HiveField(4)
   final String? overview;
+  @HiveField(5)
   final String? posterPath;
+  @HiveField(6)
   final List<dynamic> genreIds;
 
   MovieModel({

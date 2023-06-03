@@ -3,11 +3,13 @@ import 'package:filmfinder_app/data/network/api_service.dart';
 import 'package:filmfinder_app/data/repository/movie_services.dart';
 import 'package:filmfinder_app/models/movie_model.dart';
 import 'package:filmfinder_app/data/network/end_points.dart';
+import 'package:hive/hive.dart';
 
 //! The Repository layer is to complete the abstraction of the data layer and to provide a clean API for the ViewModel to communicate with.
 
 class MovieRepository extends MovieServices {
   final ApiService _apiService = ApiService();
+  List<MovieModel> moviesListGlobal = [];
 
   @override
   Future<List<String>> getMovieGenres(MovieModel movie) async {
@@ -60,6 +62,8 @@ class MovieRepository extends MovieServices {
       moviesList = response['results']
           .map((movie) => MovieModel.fromJson(movie))
           .toList();
+      // so that we can cache the data
+      moviesListGlobal = moviesList;
     } catch (error) {
       throw InternetException(error.toString());
     }
@@ -85,6 +89,26 @@ class MovieRepository extends MovieServices {
     return moviesSearchedList;
   }
 
+// Hive Local Storage Implementation
+  void saveMoviesToHive(List<MovieModel> moviesList) {
+    final box = Hive.box<MovieModel>('movies');
+    if (moviesListGlobal.isNotEmpty) {
+      for (var movie in moviesListGlobal) {
+        movie.save(); // Hive stores it persistently!
+        box.add(movie);
+      }
+    } else {
+      throw InternetException('Need Internet first to get the movies');
+    }
+  }
+
+  List<MovieModel> getMoviesFromHive() {
+    final box = Hive.box<MovieModel>('movies');
+    if (box.values.toList().isNotEmpty) {
+      return box.values.toList().cast<MovieModel>();
+    }
+    return [];
+  }
 }
 
 void main(List<String> args) {
