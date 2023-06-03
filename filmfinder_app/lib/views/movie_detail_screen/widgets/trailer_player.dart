@@ -13,7 +13,13 @@ class TrailerPlayer extends StatefulWidget {
 }
 
 class _TrailerPlayerState extends State<TrailerPlayer> {
-  late YoutubePlayerController youtubePlayerController;
+  YoutubePlayerController youtubePlayerController = YoutubePlayerController(
+      initialVideoId: "someVideoID",
+      flags: const YoutubePlayerFlags(
+        autoPlay: true,
+        mute: false,
+      ),
+    );
 
   @override
   void initState() {

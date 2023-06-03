@@ -14,7 +14,7 @@ class Utils {
   static void showFlutterToast(String message) {
     Fluttertoast.showToast(
       msg: message,
-      backgroundColor: Coolors.kGenereGreenColor,
+      backgroundColor: Coolors.kGenereColors[2],
       textColor: Colors.black,
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.CENTER,

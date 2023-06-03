@@ -10,7 +10,7 @@ class Routes {
       case RoutesNames.movieHome:
         return MaterialPageRoute(builder: (context) => MovieHomeScreen());
       case RoutesNames.movieDetails:
-        return MaterialPageRoute(builder: (context) => MovieDetailsScreen());
+        return MaterialPageRoute(builder: (context) => MoviesDetailsScreen());
       case RoutesNames.movieTicket:
         return MaterialPageRoute(builder: (context) => MovieTicketScreen());
       default:

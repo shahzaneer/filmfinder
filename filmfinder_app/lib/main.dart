@@ -4,11 +4,15 @@ import 'package:filmfinder_app/routes/routes.dart';
 import 'package:filmfinder_app/utils/coloors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:fast_cached_network_image/fast_cached_network_image.dart';
 
 void main() async {
+  // Load .env file
+  await dotenv.load(fileName: ".env");
+  // Initialize the Flutter Widgets Bindings
   WidgetsFlutterBinding.ensureInitialized();
   // Make a directory for hive Data
   var directory = await getApplicationDocumentsDirectory();
@@ -41,8 +45,8 @@ class FilmFinderApp extends StatelessWidget {
     return MaterialApp(
       theme: Coolors.filmFinderTheme,
       debugShowCheckedModeBanner: false,
-      initialRoute: RoutesNames.movieHome,
-      onGenerateRoute:Routes.generateRoutes,
+      initialRoute: RoutesNames.movieDetails,
+      onGenerateRoute: Routes.generateRoutes,
     );
   }
 }

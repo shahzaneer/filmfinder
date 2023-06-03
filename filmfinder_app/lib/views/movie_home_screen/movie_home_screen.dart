@@ -1,4 +1,5 @@
 import 'package:filmfinder_app/utils/coloors.dart';
+import 'package:filmfinder_app/views/movie_home_screen/widgets/categories_grid.dart';
 import 'package:filmfinder_app/views/movie_home_screen/widgets/navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:anim_search_bar/anim_search_bar.dart';
@@ -37,15 +38,16 @@ class _MovieHomeScreenState extends State<MovieHomeScreen> {
                   _searchController.clear();
                 });
               },
-              onSubmitted: (text) {},
+              onSubmitted: (text) {
+                
+              },
               rtl: true,
             ),
           ),
         ],
       ),
       body: const Center(
-        // child: ListView(children: [
-        // ]),
+        child: CategoriesGrid(),
       ),
       bottomNavigationBar: NavBar(),
     );

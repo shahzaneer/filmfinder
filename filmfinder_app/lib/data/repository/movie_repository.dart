@@ -3,6 +3,7 @@ import 'package:filmfinder_app/data/network/api_service.dart';
 import 'package:filmfinder_app/data/repository/movie_services.dart';
 import 'package:filmfinder_app/models/movie_model.dart';
 import 'package:filmfinder_app/data/network/end_points.dart';
+import 'package:filmfinder_app/utils/utils.dart';
 import 'package:hive/hive.dart';
 
 //! The Repository layer is to complete the abstraction of the data layer and to provide a clean API for the ViewModel to communicate with.
@@ -107,7 +108,10 @@ class MovieRepository extends MovieServices {
     if (box.values.toList().isNotEmpty) {
       return box.values.toList().cast<MovieModel>();
     }
-    return [];
+    else{
+      Utils.showErrorToast('You have to enable internet for the first time!');
+      return [];
+    }
   }
 }
 
