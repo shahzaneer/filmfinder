@@ -14,15 +14,15 @@ class ApiUrls {
   static String dynamicUrlMaker(
       {String? searchedQuery,
       String? movieId,
-      required endPoints selectedEndPoint}) {
+      required EndPoints selectedEndPoint}) {
     switch (selectedEndPoint) {
-      case endPoints.movieList:
+      case EndPoints.movieList:
         return "$baseurl$_movieList?api_key=$_apiKey&language=en-US&page=$_pageNo";
-      case endPoints.movieSearch:
+      case EndPoints.movieSearch:
         return "$baseurl$_movieSearch?api_key=$_apiKey&query=$searchedQuery&include_adult=false&language=en-US&page=$_pageNo";
-      case endPoints.movieGenre:
+      case EndPoints.movieGenre:
         return "$baseurl$_movieGenre?api_key=$_apiKey&language=en";
-      case endPoints.movieTrailer:
+      case EndPoints.movieTrailer:
         return "$baseurl/3/movie/$movieId/videos?api_key=$_apiKey&language=en-US";
       default:
         return "$baseurl$_movieList?api_key=$_apiKey&language=en-US&page=$_pageNo";

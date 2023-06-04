@@ -12,7 +12,7 @@ class ApiService extends BaseApiServices {
   Future<dynamic> get(
       {String? movieId,
       String? searchedQuery,
-      required endPoints givenEndPoint}) async {
+      required EndPoints givenEndPoint}) async {
     final String url;
     if (searchedQuery != null) {
       url = ApiUrls.dynamicUrlMaker(

@@ -10,7 +10,7 @@ class CategoriesGrid extends StatelessWidget {
       crossAxisCount: 2,
       mainAxisSpacing: 0, //Horizontal Spacing
       crossAxisSpacing: 10.0, //Vertical Spacing
-      children: [
+      children: const [
         Category(
           path: "assets/comedy.png",
           name: "Comedy",

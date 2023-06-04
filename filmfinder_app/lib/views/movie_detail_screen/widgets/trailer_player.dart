@@ -20,7 +20,6 @@ class _TrailerPlayerState extends State<TrailerPlayer> {
   @override
   void initState() {
     super.initState();
-    print("Before Initialization");
     initializeTrailer();
   }
 

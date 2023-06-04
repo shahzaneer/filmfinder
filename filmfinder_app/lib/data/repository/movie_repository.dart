@@ -19,7 +19,7 @@ class MovieRepository extends MovieServices {
       final response = await _apiService.get(
           movieId: null,
           searchedQuery: null,
-          givenEndPoint: endPoints.movieGenre);
+          givenEndPoint: EndPoints.movieGenre);
       for (var genre in response['genres']) {
         if (movie.genreIds.contains(genre['id'])) {
           genresList.add(genre['name']);
@@ -39,7 +39,7 @@ class MovieRepository extends MovieServices {
       final response = await _apiService.get(
           movieId: movieId,
           searchedQuery: null,
-          givenEndPoint: endPoints.movieTrailer);
+          givenEndPoint: EndPoints.movieTrailer);
 
       for (var dataMembers in response['results']) {
         if (dataMembers['type'] == 'Trailer') {
@@ -60,7 +60,7 @@ class MovieRepository extends MovieServices {
       final response = await _apiService.get(
           movieId: null,
           searchedQuery: null,
-          givenEndPoint: endPoints.upcomingMovies);
+          givenEndPoint: EndPoints.upcomingMovies);
 
       for (var movie in response['results']) {
         var movieDartModel = MovieModel.fromMap(movie);
@@ -82,7 +82,7 @@ class MovieRepository extends MovieServices {
       final response = await _apiService.get(
           movieId: null,
           searchedQuery: searchedQuery,
-          givenEndPoint: endPoints.movieSearch);
+          givenEndPoint: EndPoints.movieSearch);
 
       for (var movie in response['results']) {
         var movieDartModel = MovieModel.fromMap(movie);

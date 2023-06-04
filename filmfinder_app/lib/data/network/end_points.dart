@@ -1,1 +1,1 @@
-enum endPoints { movieList, movieSearch, movieGenre, movieTrailer, upcomingMovies }
+enum EndPoints { movieList, movieSearch, movieGenre, movieTrailer, upcomingMovies }
