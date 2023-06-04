@@ -15,13 +15,7 @@ class TrailerPlayer extends StatefulWidget {
 }
 
 class _TrailerPlayerState extends State<TrailerPlayer> {
-  YoutubePlayerController youtubePlayerController = YoutubePlayerController(
-    initialVideoId: "someVideoID",
-    flags: const YoutubePlayerFlags(
-      autoPlay: true,
-      mute: false,
-    ),
-  );
+  YoutubePlayerController? youtubePlayerController;
 
   @override
   void initState() {
@@ -31,13 +25,10 @@ class _TrailerPlayerState extends State<TrailerPlayer> {
   }
 
   void initializeTrailer() async {
-    for (var i = 0; i < 10; i += 1) {
-      print(i);
-    }
     String movieID = widget.movieID;
     final movieProvider = Provider.of<MovieProvider>(context, listen: false);
     widget.videoKey = await movieProvider.getMovieTrailer(movieID);
-    String youtubeLink = "https://www.youtube.com/watch?v=";
+    // String youtubeLink = "https://www.youtube.com/watch?v=";
 
     bool isInternetAvailable = await InternetConnectionChecker().hasConnection;
     if (widget.movieID.isEmpty || widget.videoKey.isEmpty) {
@@ -55,16 +46,16 @@ class _TrailerPlayerState extends State<TrailerPlayer> {
         mute: false,
       ),
     );
+    setState(() {});
+    // String videoBaseUrl = "$youtubeLink${widget.videoKey}";
 
-    String videoBaseUrl = "$youtubeLink${widget.videoKey}";
-
-    print("The URL for the Trailer Video is : $videoBaseUrl");
+    // print("The URL for the Trailer Video is : $videoBaseUrl");
   }
 
   @override
   void dispose() {
     super.dispose();
-    youtubePlayerController.dispose();
+    youtubePlayerController!.dispose();
   }
 
   bool showVideo = false;
@@ -72,10 +63,12 @@ class _TrailerPlayerState extends State<TrailerPlayer> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        YoutubePlayer(
-          controller: youtubePlayerController,
-          aspectRatio: 0.6,
-        ),
+        if (youtubePlayerController != null &&
+            !youtubePlayerController!.value.isReady)
+          YoutubePlayer(
+            controller: youtubePlayerController!,
+            aspectRatio: 0.6,
+          ),
         IconButton(
           onPressed: () {
             setState(() {
