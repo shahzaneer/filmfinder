@@ -3,26 +3,26 @@ import 'package:filmfinder_app/view_models/movie_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:provider/provider.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 class TrailerPlayer extends StatefulWidget {
   TrailerPlayer({super.key, required this.movieID});
 
   final String movieID;
   String videoKey = "";
+
+  var controller = YoutubePlayerController(
+    params: const YoutubePlayerParams(
+      mute: false,
+      showControls: true,
+      showFullscreenButton: true,
+    ),
+  );
   @override
   State<TrailerPlayer> createState() => _TrailerPlayerState();
 }
 
 class _TrailerPlayerState extends State<TrailerPlayer> {
-  YoutubePlayerController youtubePlayerController = YoutubePlayerController(
-    initialVideoId: "someVideoID",
-    flags: const YoutubePlayerFlags(
-      autoPlay: true,
-      mute: false,
-    ),
-  );
-
   @override
   void initState() {
     super.initState();
@@ -31,9 +31,6 @@ class _TrailerPlayerState extends State<TrailerPlayer> {
   }
 
   void initializeTrailer() async {
-    for (var i = 0; i < 10; i += 1) {
-      print(i);
-    }
     String movieID = widget.movieID;
     final movieProvider = Provider.of<MovieProvider>(context, listen: false);
     widget.videoKey = await movieProvider.getMovieTrailer(movieID);
@@ -48,12 +45,12 @@ class _TrailerPlayerState extends State<TrailerPlayer> {
       Utils.showErrorToast("No internet connection!");
       return;
     }
-    youtubePlayerController = YoutubePlayerController(
-      initialVideoId: widget.videoKey,
-      flags: const YoutubePlayerFlags(
-        autoPlay: true,
-        mute: false,
-      ),
+    // If the requirement is just to play a single video.
+    widget.controller = YoutubePlayerController.fromVideoId(
+      // videoId: widget.videoKey,
+      videoId: "ueZbo_bQHMg",
+      autoPlay: true,
+      params: const YoutubePlayerParams(showFullscreenButton: true),
     );
 
     String videoBaseUrl = "$youtubeLink${widget.videoKey}";
@@ -61,19 +58,14 @@ class _TrailerPlayerState extends State<TrailerPlayer> {
     print("The URL for the Trailer Video is : $videoBaseUrl");
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    youtubePlayerController.dispose();
-  }
-
   bool showVideo = false;
+
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         YoutubePlayer(
-          controller: youtubePlayerController,
+          controller: widget.controller,
           aspectRatio: 0.6,
         ),
         IconButton(

@@ -36,7 +36,6 @@ dependencies:
   google_fonts: ^4.0.5
   http: ^1.0.0
   provider: ^6.0.5
-  youtube_player_flutter:
   hive: ^2.2.3
   path_provider: ^2.0.15
   hive_flutter: ^1.1.0
@@ -45,6 +44,7 @@ dependencies:
   fast_cached_network_image: ^1.2.0
   animated_search_bar: ^2.5.0
   connectivity: ^3.0.6
+  youtube_player_iframe: ^4.0.4
 
 dev_dependencies:
   # The "flutter_lints" package below contains a set of recommended lints to
