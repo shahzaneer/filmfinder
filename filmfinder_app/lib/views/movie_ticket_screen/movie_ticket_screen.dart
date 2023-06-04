@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class MovieTicketScreen extends StatefulWidget {
   const MovieTicketScreen({super.key});
 
@@ -11,6 +10,13 @@ class MovieTicketScreen extends StatefulWidget {
 class _MovieTicketScreenState extends State<MovieTicketScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: Container(
+        color: Colors.white,
+        child: const Center(
+          child: Text("Movie Ticket Screen - it is not yet implemented"),
+        ),
+      ),
+    );
   }
 }

@@ -2,12 +2,14 @@ import 'package:filmfinder_app/models/movie_model.dart';
 import 'package:filmfinder_app/routes/route_names.dart';
 import 'package:filmfinder_app/routes/routes.dart';
 import 'package:filmfinder_app/utils/coloors.dart';
+import 'package:filmfinder_app/view_models/movie_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:fast_cached_network_image/fast_cached_network_image.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   // Load .env file
@@ -42,11 +44,16 @@ class FilmFinderApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: Coolors.filmFinderTheme,
-      debugShowCheckedModeBanner: false,
-      initialRoute: RoutesNames.movieDetails,
-      onGenerateRoute: Routes.generateRoutes,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => MovieProvider(),),
+      ],
+      child: MaterialApp(
+        theme: Coolors.filmFinderTheme,
+        debugShowCheckedModeBanner: false,
+        initialRoute: RoutesNames.movieHome,
+        onGenerateRoute: Routes.generateRoutes,
+      ),
     );
   }
 }

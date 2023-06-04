@@ -2,7 +2,7 @@ import 'package:filmfinder_app/data/repository/movie_repository.dart';
 import 'package:filmfinder_app/models/movie_model.dart';
 import 'package:filmfinder_app/utils/utils.dart';
 import 'package:filmfinder_app/views/movie_detail_screen/widgets/genere_tag.dart';
-import 'package:filmfinder_app/views/movie_home_screen/widgets/movie_searched_tile.dart';
+import 'package:filmfinder_app/views/search_screen.dart/widgets/movie_searched_tile.dart';
 import 'package:filmfinder_app/views/movie_home_screen/widgets/movie_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -17,6 +17,7 @@ class MovieProvider with ChangeNotifier {
   List<MovieSearchedTile> searchedMoviesListWidget = [];
   List<GenereTag> genereListWidget = [];
   bool loading = false;
+  bool searching = false;
 
 //! Done
   void getMovies() async {
@@ -46,7 +47,7 @@ class MovieProvider with ChangeNotifier {
     try {
       bool internet = await InternetConnectionChecker().hasConnection;
       if (internet) {
-        loading = true;
+        searching = true;
         List<MovieModel> searchMovies =
             await _movieRepository.searchMovies(searchedQuery);
         searchedMoviesListWidget = searchMovies
@@ -56,7 +57,7 @@ class MovieProvider with ChangeNotifier {
         Utils.showErrorToast("No internet connection!");
       }
     } catch (e) {
-      loading = false;
+      searching = false;
       Utils.showErrorToast("Some error Occured! : $e");
     }
     loading = false;
@@ -72,6 +73,7 @@ class MovieProvider with ChangeNotifier {
 //! Done
   void getMovieGenres(MovieModel movie) async {
     try {
+      genereListWidget.clear();
       List<String> genereList = await _movieRepository.getMovieGenres(movie);
       for (var genereName in genereList) {
         genereListWidget.add(GenereTag(genereName: genereName));

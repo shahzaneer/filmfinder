@@ -9,7 +9,9 @@ import 'package:http/http.dart' as http;
 class ApiService extends BaseApiServices {
   // GET REQUEST
   @override
-  Future<dynamic> get({String? movieId, String? searchedQuery,
+  Future<dynamic> get(
+      {String? movieId,
+      String? searchedQuery,
       required endPoints givenEndPoint}) async {
     final String url;
     if (searchedQuery != null) {
@@ -22,6 +24,7 @@ class ApiService extends BaseApiServices {
     try {
       response = await http.get(Uri.parse(url));
       response = responseStatusHandler(response);
+      return response; //1.5 hour in debugging if you missed this :)
     } on SocketException {
       throw InternetException("No Internet 😔");
     }
@@ -29,9 +32,10 @@ class ApiService extends BaseApiServices {
 
 //! This Method is used to handle the different type of responses from the server
   dynamic responseStatusHandler(http.Response response) {
+    // By Reading the Api Documentation
+    // We can better handle the different types of status codes we receive!
+
     switch (response.statusCode) {
-      // By Reading the Api Documentation
-      // We can better handle the different types of status codes we receive!
       case 200:
         // 200 -> OK: it means we got the response so we will return it
         return jsonDecode(response.body);
@@ -51,6 +55,6 @@ class ApiService extends BaseApiServices {
   }
 }
 
-void main(List<String> args) {
-  // Testing purposes
-}
+// void main(List<String> args) {
+//   // Testing purposes
+// }

@@ -8,15 +8,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class MoviePoster extends StatelessWidget {
-  // MovieModel movie;
+  MovieModel movie;
   final Function showTrailer;
 
   //! Sample data For Widget Building
-  MovieModel movie = MovieModel(
-      originalTitle: "originalTitle",
-      id: "1",
-      genreIds: [],
-      backdropPath: "/94TIUEhuwv8PhdIADEvSuwPljS5.jpg");
+  // MovieModel movie = MovieModel(
+  //     originalTitle: "originalTitle",
+  //     id: "1",
+  //     genreIds: [],
+  //     backdropPath: "/94TIUEhuwv8PhdIADEvSuwPljS5.jpg");
 
   MoviePoster({
     Key? key,
@@ -68,11 +68,11 @@ class MoviePoster extends StatelessWidget {
         Center(
           child: Column(
             children: [
-              const Padding(
-                padding: EdgeInsets.all(14.0),
+              Padding(
+                padding: const EdgeInsets.all(14.0),
                 child: Text(
-                  "In Theaters Release Date here",
-                  style: TextStyle(
+                  "In Theaters Release on ${movie.releaseDate}",
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 18,
                     fontWeight: FontWeight.w600,

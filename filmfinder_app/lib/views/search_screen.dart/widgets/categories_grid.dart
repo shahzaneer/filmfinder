@@ -1,4 +1,4 @@
-import 'package:filmfinder_app/views/movie_home_screen/widgets/cateogry.dart';
+import 'package:filmfinder_app/views/search_screen.dart/widgets/cateogry.dart';
 import 'package:flutter/material.dart';
 
 class CategoriesGrid extends StatelessWidget {

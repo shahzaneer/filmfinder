@@ -40,7 +40,7 @@ class MovieRepository extends MovieServices {
           movieId: movieId,
           searchedQuery: null,
           givenEndPoint: endPoints.movieTrailer);
-      for (var dataMembers in response['results'][0]) {
+      for (var dataMembers in response['results']) {
         if (dataMembers['type'] == 'Trailer') {
           trailerkey = dataMembers['key'];
         }
@@ -60,9 +60,12 @@ class MovieRepository extends MovieServices {
           movieId: null,
           searchedQuery: null,
           givenEndPoint: endPoints.upcomingMovies);
-      moviesList = response['results']
-          .map((movie) => MovieModel.fromJson(movie))
-          .toList();
+
+      for (var movie in response['results']) {
+        var movieDartModel = MovieModel.fromMap(movie);
+        moviesList.add(movieDartModel);
+      }
+
       // so that we can cache the data
       moviesListGlobal = moviesList;
     } catch (error) {
@@ -81,7 +84,7 @@ class MovieRepository extends MovieServices {
           searchedQuery: searchedQuery,
           givenEndPoint: endPoints.movieSearch);
       moviesSearchedList = response['results']
-          .map((movie) => MovieModel.fromJson(movie))
+          .map((movie) => MovieModel.fromMap(movie))
           .toList();
     } catch (error) {
       throw InternetException(error.toString());
@@ -107,8 +110,7 @@ class MovieRepository extends MovieServices {
     final box = Hive.box<MovieModel>('movies');
     if (box.values.toList().isNotEmpty) {
       return box.values.toList().cast<MovieModel>();
-    }
-    else{
+    } else {
       Utils.showErrorToast('You have to enable internet for the first time!');
       return [];
     }

@@ -1,4 +1,8 @@
+import 'package:filmfinder_app/models/movie_model.dart';
 import 'package:filmfinder_app/routes/route_names.dart';
+import 'package:filmfinder_app/views/movie_home_screen/widgets/movie_tile.dart';
+import 'package:filmfinder_app/views/search_screen.dart/movie_search_screen.dart';
+import 'package:filmfinder_app/views/search_screen.dart/widgets/movie_searched_tile.dart';
 import 'package:flutter/material.dart';
 import '../views/movie_detail_screen/movie_detail_screen.dart';
 import '../views/movie_home_screen/movie_home_screen.dart';
@@ -10,9 +14,18 @@ class Routes {
       case RoutesNames.movieHome:
         return MaterialPageRoute(builder: (context) => MovieHomeScreen());
       case RoutesNames.movieDetails:
-        return MaterialPageRoute(builder: (context) => MoviesDetailsScreen());
+        return MaterialPageRoute(
+            builder: (context) =>
+                MoviesDetailsScreen(movie: settings.arguments as MovieModel));
       case RoutesNames.movieTicket:
-        return MaterialPageRoute(builder: (context) => MovieTicketScreen());
+        return MaterialPageRoute(
+            builder: (context) => const MovieTicketScreen());
+      case RoutesNames.movieSearch:
+        return MaterialPageRoute(
+          builder: (context) => MovieSearchScreen(
+            movieTile: settings.arguments as List<MovieSearchedTile>,
+          ),
+        );
       default:
         return MaterialPageRoute(
           builder: (context) {
