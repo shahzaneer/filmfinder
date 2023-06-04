@@ -44,6 +44,7 @@ dependencies:
   flutter_dotenv: ^5.0.2
   fast_cached_network_image: ^1.2.0
   anim_search_bar: ^2.0.3
+  animated_search_bar: ^2.5.0
 
 dev_dependencies:
   # The "flutter_lints" package below contains a set of recommended lints to

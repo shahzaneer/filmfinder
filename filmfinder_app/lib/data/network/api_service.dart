@@ -15,8 +15,10 @@ class ApiService extends BaseApiServices {
       required endPoints givenEndPoint}) async {
     final String url;
     if (searchedQuery != null) {
+      print("Searched Query is not null");
       url = ApiUrls.dynamicUrlMaker(
           searchedQuery: searchedQuery, selectedEndPoint: givenEndPoint);
+      print("url : $url");
     } else {
       url = ApiUrls.dynamicUrlMaker(selectedEndPoint: givenEndPoint);
     }
@@ -24,7 +26,7 @@ class ApiService extends BaseApiServices {
     try {
       response = await http.get(Uri.parse(url));
       response = responseStatusHandler(response);
-      return response; //1.5 hour in debugging if you missed this :)
+      return response;
     } on SocketException {
       throw InternetException("No Internet 😔");
     }
@@ -47,6 +49,7 @@ class ApiService extends BaseApiServices {
         throw BadRequestException(
             "Invalid page: Pages start at 1 and max at 1000. They are expected to be an integer.");
       case 401:
+        print("${response.statusCode} : ${response.reasonPhrase}");
         return "invalid Api Key";
       default:
         throw InternetException(

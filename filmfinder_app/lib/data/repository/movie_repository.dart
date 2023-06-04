@@ -79,14 +79,21 @@ class MovieRepository extends MovieServices {
   Future<List<MovieModel>> searchMovies(String searchedQuery) async {
     List<MovieModel> moviesSearchedList = [];
     try {
+      print("Repository main");
       final response = await _apiService.get(
           movieId: null,
           searchedQuery: searchedQuery,
           givenEndPoint: endPoints.movieSearch);
-      moviesSearchedList = response['results']
-          .map((movie) => MovieModel.fromMap(movie))
-          .toList();
+      print("after the api service call!!");
+      print("Response is $response");
+
+      for(var movie in response['results']){
+        var movieDartModel = MovieModel.fromMap(movie);
+        moviesSearchedList.add(movieDartModel);
+      }
+      
     } catch (error) {
+      print("Code nhi challaa");
       throw InternetException(error.toString());
     }
 

@@ -23,7 +23,7 @@ class Routes {
       case RoutesNames.movieSearch:
         return MaterialPageRoute(
           builder: (context) => MovieSearchScreen(
-            movieTile: settings.arguments as List<MovieSearchedTile>,
+            movieTile: settings.arguments as List<MovieTile>,
           ),
         );
       default:

@@ -47,9 +47,14 @@ class MovieProvider with ChangeNotifier {
     try {
       bool internet = await InternetConnectionChecker().hasConnection;
       if (internet) {
+        print("Search provider main");
         searching = true;
         List<MovieModel> searchMovies =
             await _movieRepository.searchMovies(searchedQuery);
+        print("After calling repo");
+        for (var movie in searchMovies) {
+          print("movie : $movie");
+        }
         searchedMoviesListWidget = searchMovies
             .map((movie) => MovieSearchedTile(movie: movie))
             .toList();

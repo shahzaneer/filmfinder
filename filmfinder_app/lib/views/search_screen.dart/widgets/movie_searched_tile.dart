@@ -35,54 +35,67 @@ class MovieSearchedTile extends StatelessWidget {
         height: height * 0.18,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: EdgeInsets.only(left: width * 0.03),
-              child: SizedBox(
-                height: height * 0.125,
-                width: width * 0.44,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: FastCachedImage(
-                    url: "${ApiUrls.baseImageUrl}${movie.backdropPath}",
-                    loadingBuilder: (p0, p1) {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    },
-                    errorBuilder: (p0, p1, p2) {
-                      // debugPrint("Error: $p2");
-                      return Container(
-                        color: Colors.grey,
-                      );
-                    },
-                    fit: BoxFit.cover,
+            Expanded(
+              flex: 2,
+              child: Padding(
+                padding: EdgeInsets.only(left: width * 0.03),
+                child: SizedBox(
+                  height: height * 0.125,
+                  width: width * 0.44,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: FastCachedImage(
+                      url: "${ApiUrls.baseImageUrl}${movie.backdropPath}",
+                      loadingBuilder: (p0, p1) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      },
+                      errorBuilder: (p0, p1, p2) {
+                        // debugPrint("Error: $p2");
+                        return Container(
+                          color: Colors.grey,
+                        );
+                      },
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  movie.originalTitle,
-                  style: const TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 17),
-                ),
-                SizedBox(height: height * 0.002),
-                const Text(
-                  "generes",
-                  style: TextStyle(color: Colors.grey),
-                ),
-              ],
+            Expanded(
+              child: SizedBox(width: width * 0.01),
             ),
-            Padding(
-              padding: EdgeInsets.only(right: width * 0.05),
-              child: const Icon(Icons.more_horiz_outlined),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Text(
+                      movie.originalTitle,
+                      style: const TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16),
+                    ),
+                  ),
+                  const Expanded(
+                    child: Text(
+                      "genre",
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.only(right: width * 0.05),
+                child: const Icon(Icons.more_horiz_outlined),
+              ),
             )
           ],
         ),
