@@ -1,12 +1,10 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:math';
-
 import 'package:filmfinder_app/utils/coloors.dart';
 import 'package:flutter/material.dart';
 
 class GenereTag extends StatelessWidget {
-  String genereName;
-  GenereTag({
+  final String genereName;
+  const GenereTag({
     Key? key,
     required this.genereName,
   }) : super(key: key);

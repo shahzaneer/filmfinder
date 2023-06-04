@@ -5,14 +5,14 @@ import 'package:filmfinder_app/routes/route_names.dart';
 import 'package:flutter/material.dart';
 
 class MovieTile extends StatelessWidget {
-  MovieModel movie;
+  final MovieModel movie;
   //! Sample data For Widget Building
   // MovieModel movie = MovieModel(
   //     originalTitle: "originalTitle",
   //     id: "1",
   //     genreIds: [],
   //     backdropPath: "/94TIUEhuwv8PhdIADEvSuwPljS5.jpg");
-  MovieTile({super.key, required this.movie});
+  const MovieTile({super.key, required this.movie});
 
   @override
   Widget build(BuildContext context) {

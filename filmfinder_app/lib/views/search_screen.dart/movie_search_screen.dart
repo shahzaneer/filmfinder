@@ -8,9 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class MovieSearchScreen extends StatefulWidget {
-  List<MovieTile> movieTile;
+  final List<MovieTile> movieTile;
 
-  MovieSearchScreen({
+  const MovieSearchScreen({
     Key? key,
     required this.movieTile,
   }) : super(key: key);
@@ -41,7 +41,6 @@ class _MovieSearchScreenState extends State<MovieSearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Coolors.kAppBarBackgroundColor,

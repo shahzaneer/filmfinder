@@ -1,11 +1,10 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 class Category extends StatelessWidget {
-  String path;
-  String name;
+  final String path;
+  final String name;
 
-  Category({
+  const Category({
     Key? key,
     required this.path,
     required this.name,

@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:filmfinder_app/models/movie_model.dart';
 import 'package:filmfinder_app/utils/utils.dart';
 import 'package:filmfinder_app/view_models/movie_providers.dart';
@@ -11,8 +10,8 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:provider/provider.dart';
 
 class MoviesDetailsScreen extends StatefulWidget {
-  MovieModel movie;
-  MoviesDetailsScreen({
+  final MovieModel movie;
+  const MoviesDetailsScreen({
     Key? key,
     required this.movie,
   }) : super(key: key);

@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:fast_cached_network_image/fast_cached_network_image.dart';
 import 'package:filmfinder_app/data/network/api_urls.dart';
 import 'package:filmfinder_app/models/movie_model.dart';
@@ -8,7 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class MoviePoster extends StatelessWidget {
-  MovieModel movie;
+  final MovieModel movie;
   final Function showTrailer;
 
   //! Sample data For Widget Building
@@ -18,7 +17,7 @@ class MoviePoster extends StatelessWidget {
   //     genreIds: [],
   //     backdropPath: "/94TIUEhuwv8PhdIADEvSuwPljS5.jpg");
 
-  MoviePoster({
+  const MoviePoster({
     Key? key,
     required this.movie,
     required this.showTrailer,
@@ -41,7 +40,6 @@ class MoviePoster extends StatelessWidget {
             );
           },
           errorBuilder: (p0, p1, p2) {
-            // debugPrint("Error: $p2");
             return Container(
               color: Colors.grey,
             );

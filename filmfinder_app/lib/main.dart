@@ -46,7 +46,9 @@ class FilmFinderApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => MovieProvider(),),
+        ChangeNotifierProvider(
+          create: (context) => MovieProvider(),
+        ),
       ],
       child: MaterialApp(
         theme: Coolors.filmFinderTheme,

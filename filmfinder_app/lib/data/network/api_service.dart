@@ -24,11 +24,9 @@ class ApiService extends BaseApiServices {
       url = ApiUrls.dynamicUrlMaker(selectedEndPoint: givenEndPoint);
     }
 
-    print(url);
     dynamic response;
     try {
       response = await http.get(Uri.parse(url));
-      print("response Direct after call is $response");
       response = responseStatusHandler(response);
       return response;
     } on SocketException {
@@ -37,10 +35,10 @@ class ApiService extends BaseApiServices {
   }
 
 //! This Method is used to handle the different type of responses from the server
-  dynamic responseStatusHandler(http.Response response) {
-    // By Reading the Api Documentation
-    // We can better handle the different types of status codes we receive!
+// By Reading the Api Documentation
+// We can better handle the different types of status codes we receive!
 
+  dynamic responseStatusHandler(http.Response response) {
     switch (response.statusCode) {
       case 200:
         // 200 -> OK: it means we got the response so we will return it
@@ -53,7 +51,6 @@ class ApiService extends BaseApiServices {
         throw BadRequestException(
             "Invalid page: Pages start at 1 and max at 1000. They are expected to be an integer.");
       case 401:
-        print("${response.statusCode} : ${response.reasonPhrase}");
         return "invalid Api Key";
       default:
         throw InternetException(

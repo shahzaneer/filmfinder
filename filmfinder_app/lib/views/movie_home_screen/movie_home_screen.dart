@@ -13,7 +13,6 @@ class MovieHomeScreen extends StatefulWidget {
 }
 
 class _MovieHomeScreenState extends State<MovieHomeScreen> {
-  final _searchController = TextEditingController();
 
   @override
   void initState() {

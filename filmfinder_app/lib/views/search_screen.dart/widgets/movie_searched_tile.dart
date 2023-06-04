@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:fast_cached_network_image/fast_cached_network_image.dart';
 import 'package:filmfinder_app/data/network/api_urls.dart';
 import 'package:filmfinder_app/models/movie_model.dart';
@@ -6,9 +5,9 @@ import 'package:filmfinder_app/routes/route_names.dart';
 import 'package:flutter/material.dart';
 
 class MovieSearchedTile extends StatelessWidget {
-  MovieModel movie;
+  final MovieModel movie;
 
-  MovieSearchedTile({
+  const MovieSearchedTile({
     Key? key,
     required this.movie,
   }) : super(key: key);

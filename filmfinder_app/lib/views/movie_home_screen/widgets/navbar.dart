@@ -1,12 +1,11 @@
 import 'package:filmfinder_app/utils/coloors.dart';
 import 'package:flutter/material.dart';
 
-// ignore: must_be_immutable
 class NavBar extends StatelessWidget {
   NavBar({super.key});
 
   final ValueNotifier<int> _selectedIndex = ValueNotifier(0);
-  int newIndex = 0;
+  final int newIndex = 0;
 
   void tabChosen(int index) {
     _selectedIndex.value = index;

@@ -6,16 +6,16 @@ import 'package:provider/provider.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class TrailerPlayer extends StatefulWidget {
-  TrailerPlayer({super.key, required this.movieID});
+  const TrailerPlayer({super.key, required this.movieID});
 
   final String movieID;
-  String videoKey = "";
   @override
   State<TrailerPlayer> createState() => _TrailerPlayerState();
 }
 
 class _TrailerPlayerState extends State<TrailerPlayer> {
   YoutubePlayerController? youtubePlayerController;
+  String? videoKey;
 
   @override
   void initState() {
@@ -27,11 +27,9 @@ class _TrailerPlayerState extends State<TrailerPlayer> {
   void initializeTrailer() async {
     String movieID = widget.movieID;
     final movieProvider = Provider.of<MovieProvider>(context, listen: false);
-    widget.videoKey = await movieProvider.getMovieTrailer(movieID);
-    // String youtubeLink = "https://www.youtube.com/watch?v=";
-
+    videoKey = await movieProvider.getMovieTrailer(movieID);
     bool isInternetAvailable = await InternetConnectionChecker().hasConnection;
-    if (widget.movieID.isEmpty || widget.videoKey.isEmpty) {
+    if (widget.movieID.isEmpty || videoKey!.isEmpty) {
       Utils.showErrorToast("No trailer available");
       return;
     }
@@ -39,17 +37,17 @@ class _TrailerPlayerState extends State<TrailerPlayer> {
       Utils.showErrorToast("No internet connection!");
       return;
     }
+    // Initializing the Controller
     youtubePlayerController = YoutubePlayerController(
-      initialVideoId: widget.videoKey,
+      initialVideoId: videoKey!,
       flags: const YoutubePlayerFlags(
         autoPlay: true,
         mute: false,
       ),
     );
+    // Notify the UI to rebuild itself!
     setState(() {});
-    // String videoBaseUrl = "$youtubeLink${widget.videoKey}";
 
-    // print("The URL for the Trailer Video is : $videoBaseUrl");
   }
 
   @override

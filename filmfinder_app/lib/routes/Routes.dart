@@ -2,7 +2,6 @@ import 'package:filmfinder_app/models/movie_model.dart';
 import 'package:filmfinder_app/routes/route_names.dart';
 import 'package:filmfinder_app/views/movie_home_screen/widgets/movie_tile.dart';
 import 'package:filmfinder_app/views/search_screen.dart/movie_search_screen.dart';
-import 'package:filmfinder_app/views/search_screen.dart/widgets/movie_searched_tile.dart';
 import 'package:flutter/material.dart';
 import '../views/movie_detail_screen/movie_detail_screen.dart';
 import '../views/movie_home_screen/movie_home_screen.dart';

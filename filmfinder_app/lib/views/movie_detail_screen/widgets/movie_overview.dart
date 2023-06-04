@@ -1,12 +1,10 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:filmfinder_app/models/movie_model.dart';
 import 'package:filmfinder_app/view_models/movie_providers.dart';
-import 'package:filmfinder_app/views/movie_detail_screen/widgets/genere_tag.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class MovieOverview extends StatefulWidget {
-  MovieModel movie;
+  final MovieModel movie;
   //! Sample data For Widget Building
   // MovieModel movie = MovieModel(
   //     originalTitle: "originalTitle",
@@ -14,7 +12,7 @@ class MovieOverview extends StatefulWidget {
   //     genreIds: [],
   //     backdropPath: "/94TIUEhuwv8PhdIADEvSuwPljS5.jpg");
 
-  MovieOverview({
+  const MovieOverview({
     Key? key,
     required this.movie,
   }) : super(key: key);
