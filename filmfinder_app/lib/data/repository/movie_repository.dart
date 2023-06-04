@@ -40,6 +40,7 @@ class MovieRepository extends MovieServices {
           movieId: movieId,
           searchedQuery: null,
           givenEndPoint: endPoints.movieTrailer);
+
       for (var dataMembers in response['results']) {
         if (dataMembers['type'] == 'Trailer') {
           trailerkey = dataMembers['key'];
@@ -65,7 +66,6 @@ class MovieRepository extends MovieServices {
         var movieDartModel = MovieModel.fromMap(movie);
         moviesList.add(movieDartModel);
       }
-
       // so that we can cache the data
       moviesListGlobal = moviesList;
     } catch (error) {
@@ -79,21 +79,16 @@ class MovieRepository extends MovieServices {
   Future<List<MovieModel>> searchMovies(String searchedQuery) async {
     List<MovieModel> moviesSearchedList = [];
     try {
-      print("Repository main");
       final response = await _apiService.get(
           movieId: null,
           searchedQuery: searchedQuery,
           givenEndPoint: endPoints.movieSearch);
-      print("after the api service call!!");
-      print("Response is $response");
 
-      for(var movie in response['results']){
+      for (var movie in response['results']) {
         var movieDartModel = MovieModel.fromMap(movie);
         moviesSearchedList.add(movieDartModel);
       }
-      
     } catch (error) {
-      print("Code nhi challaa");
       throw InternetException(error.toString());
     }
 
@@ -116,7 +111,7 @@ class MovieRepository extends MovieServices {
   List<MovieModel> getMoviesFromHive() {
     final box = Hive.box<MovieModel>('movies');
     if (box.values.toList().isNotEmpty) {
-      return box.values.toList().cast<MovieModel>();
+      return box.values.toList().cast<MovieModel>().toList();
     } else {
       Utils.showErrorToast('You have to enable internet for the first time!');
       return [];

@@ -31,9 +31,14 @@ class MovieProvider with ChangeNotifier {
         Utils.showFlutterToast("NO Internet! Checking in the Local DataBase");
         movies = _movieRepository.getMoviesFromHive();
       }
-// Now Mapping the data to the UI
-      allMoviesListWidget =
-          movies.map((movie) => MovieTile(movie: movie)).toList();
+
+      for (var movie in movies) {
+        allMoviesListWidget.add(
+          MovieTile(
+            movie: movie,
+          ),
+        );
+      }
     } catch (e) {
       loading = false;
       Utils.showErrorToast("Some error Occured! : $e");
@@ -47,14 +52,10 @@ class MovieProvider with ChangeNotifier {
     try {
       bool internet = await InternetConnectionChecker().hasConnection;
       if (internet) {
-        print("Search provider main");
         searching = true;
         List<MovieModel> searchMovies =
             await _movieRepository.searchMovies(searchedQuery);
-        print("After calling repo");
-        for (var movie in searchMovies) {
-          print("movie : $movie");
-        }
+
         searchedMoviesListWidget = searchMovies
             .map((movie) => MovieSearchedTile(movie: movie))
             .toList();
@@ -98,13 +99,6 @@ class MovieProvider with ChangeNotifier {
       }
     }
     // Linking to UI
-    notifyListeners();
-  }
-
-//! Done
-  void clearSearch() async {
-    searchedMoviesListWidget.clear();
-    getMovies();
     notifyListeners();
   }
 }

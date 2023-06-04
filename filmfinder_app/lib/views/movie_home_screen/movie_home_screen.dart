@@ -3,7 +3,6 @@ import 'package:filmfinder_app/utils/coloors.dart';
 import 'package:filmfinder_app/view_models/movie_providers.dart';
 import 'package:filmfinder_app/views/movie_home_screen/widgets/navbar.dart';
 import 'package:flutter/material.dart';
-import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:provider/provider.dart';
 
 class MovieHomeScreen extends StatefulWidget {

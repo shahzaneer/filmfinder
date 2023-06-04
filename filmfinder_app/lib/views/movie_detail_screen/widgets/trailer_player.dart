@@ -1,39 +1,46 @@
 import 'package:filmfinder_app/utils/utils.dart';
+import 'package:filmfinder_app/view_models/movie_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:provider/provider.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class TrailerPlayer extends StatefulWidget {
-  const TrailerPlayer({super.key, required this.trailerId});
+  TrailerPlayer({super.key, required this.movieID});
 
-  final String trailerId;
-
+  final String movieID;
+  String videoKey = "";
   @override
   State<TrailerPlayer> createState() => _TrailerPlayerState();
 }
 
 class _TrailerPlayerState extends State<TrailerPlayer> {
   YoutubePlayerController youtubePlayerController = YoutubePlayerController(
-      initialVideoId: "someVideoID",
-      flags: const YoutubePlayerFlags(
-        autoPlay: true,
-        mute: false,
-      ),
-    );
+    initialVideoId: "someVideoID",
+    flags: const YoutubePlayerFlags(
+      autoPlay: true,
+      mute: false,
+    ),
+  );
 
   @override
   void initState() {
     super.initState();
-
+    print("Before Initialization");
     initializeTrailer();
   }
 
   void initializeTrailer() async {
-    String videoId = widget.trailerId;
-    // String youtubeLink = "https://www.youtube.com/watch?v=";
-    // String videoBaseUrl = "$youtubeLink$videoId";
+    for (var i = 0; i < 10; i += 1) {
+      print(i);
+    }
+    String movieID = widget.movieID;
+    final movieProvider = Provider.of<MovieProvider>(context, listen: false);
+    widget.videoKey = await movieProvider.getMovieTrailer(movieID);
+    String youtubeLink = "https://www.youtube.com/watch?v=";
+
     bool isInternetAvailable = await InternetConnectionChecker().hasConnection;
-    if (videoId.isEmpty && isInternetAvailable) {
+    if (widget.movieID.isEmpty || widget.videoKey.isEmpty) {
       Utils.showErrorToast("No trailer available");
       return;
     }
@@ -42,12 +49,16 @@ class _TrailerPlayerState extends State<TrailerPlayer> {
       return;
     }
     youtubePlayerController = YoutubePlayerController(
-      initialVideoId: videoId,
+      initialVideoId: widget.videoKey,
       flags: const YoutubePlayerFlags(
         autoPlay: true,
         mute: false,
       ),
     );
+
+    String videoBaseUrl = "$youtubeLink${widget.videoKey}";
+
+    print("The URL for the Trailer Video is : $videoBaseUrl");
   }
 
   @override

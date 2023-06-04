@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:animated_search_bar/animated_search_bar.dart';
 import 'package:filmfinder_app/utils/coloors.dart';
 import 'package:filmfinder_app/utils/utils.dart';
@@ -90,33 +89,3 @@ class _MovieSearchScreenState extends State<MovieSearchScreen> {
   }
 }
 
-// Padding(
-//   padding: const EdgeInsets.only(right: 15, bottom: 7),
-//   child: GestureDetector(
-//     onTap: () {
-//       setState(() {
-//         showGrid = false;
-//       });
-//     },
-//     child: AnimSearchBar(
-//       color: Coolors.kBackgroundColor,
-//       width: size.width * 0.9,
-//       textController: _searchController,
-//       helpText: "TV shows, Movies & More",
-//       onSuffixTap: () {
-//         setState(() {
-//           _searchController.clear();
-//         });
-//       },
-//       onSubmitted: (text) {
-//         if (text.isEmpty && text.length == 1) {
-//           setState(() {
-//             showGrid = true;
-//           });
-//           // show ListView
-//         } else if (text.length > 1) {
-//           showGrid = false;
-//         }
-//       },
-//       rtl: true,
-//     ),

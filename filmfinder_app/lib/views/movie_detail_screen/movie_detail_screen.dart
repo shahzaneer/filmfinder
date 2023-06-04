@@ -85,7 +85,7 @@ class _MoviesDetailsScreenState extends State<MoviesDetailsScreen> {
           children: [
             playTrailer
                 ? TrailerPlayer(
-                    trailerId: videoKey,
+                    movieID: widget.movie.id,
                   )
                 : MoviePoster(
                     movie: widget.movie,

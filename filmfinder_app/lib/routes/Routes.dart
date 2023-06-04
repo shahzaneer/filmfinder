@@ -12,7 +12,7 @@ class Routes {
   static Route<dynamic> generateRoutes(RouteSettings settings) {
     switch (settings.name) {
       case RoutesNames.movieHome:
-        return MaterialPageRoute(builder: (context) => MovieHomeScreen());
+        return MaterialPageRoute(builder: (context) => const MovieHomeScreen());
       case RoutesNames.movieDetails:
         return MaterialPageRoute(
             builder: (context) =>

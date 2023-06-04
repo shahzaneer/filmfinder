@@ -23,7 +23,7 @@ class ApiUrls {
       case endPoints.movieGenre:
         return "$baseurl$_movieGenre?api_key=$_apiKey&language=en";
       case endPoints.movieTrailer:
-        return "$baseurl/3/movie$movieId/videos?api_key=$_apiKey&language=en-US";
+        return "$baseurl/3/movie/$movieId/videos?api_key=$_apiKey&language=en-US";
       default:
         return "$baseurl$_movieList?api_key=$_apiKey&language=en-US&page=$_pageNo";
     }

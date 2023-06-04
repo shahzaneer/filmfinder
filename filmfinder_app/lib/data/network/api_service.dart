@@ -15,16 +15,20 @@ class ApiService extends BaseApiServices {
       required endPoints givenEndPoint}) async {
     final String url;
     if (searchedQuery != null) {
-      print("Searched Query is not null");
       url = ApiUrls.dynamicUrlMaker(
           searchedQuery: searchedQuery, selectedEndPoint: givenEndPoint);
-      print("url : $url");
+    } else if (movieId != null) {
+      url = ApiUrls.dynamicUrlMaker(
+          movieId: movieId, selectedEndPoint: givenEndPoint);
     } else {
       url = ApiUrls.dynamicUrlMaker(selectedEndPoint: givenEndPoint);
     }
+
+    print(url);
     dynamic response;
     try {
       response = await http.get(Uri.parse(url));
+      print("response Direct after call is $response");
       response = responseStatusHandler(response);
       return response;
     } on SocketException {
