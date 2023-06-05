@@ -3,6 +3,7 @@ import 'package:filmfinder_app/data/network/api_urls.dart';
 import 'package:filmfinder_app/models/movie_model.dart';
 import 'package:filmfinder_app/routes/route_names.dart';
 import 'package:filmfinder_app/utils/coloors.dart';
+import 'package:filmfinder_app/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -25,6 +26,7 @@ class MoviePoster extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final date = Utils.dateEnhancer(movie.releaseDate);
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return Stack(
@@ -69,7 +71,7 @@ class MoviePoster extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(14.0),
                 child: Text(
-                  "In Theaters Release on ${movie.releaseDate}",
+                  "In Theaters Release on $date",
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 18,

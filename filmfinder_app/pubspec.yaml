@@ -45,6 +45,7 @@ dependencies:
   fast_cached_network_image: ^1.2.0
   animated_search_bar: ^2.5.0
   connectivity: ^3.0.6
+  intl:
 
 dev_dependencies:
   # The "flutter_lints" package below contains a set of recommended lints to
