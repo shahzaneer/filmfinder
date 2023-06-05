@@ -6,19 +6,15 @@ import 'package:provider/provider.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class TrailerPlayer extends StatefulWidget {
-  const TrailerPlayer(
-      {super.key, required this.movieID, required this.onIconPressed});
+  const TrailerPlayer({super.key, required this.movieID});
 
   final String movieID;
-  final Function()? onIconPressed;
-
   @override
   State<TrailerPlayer> createState() => _TrailerPlayerState();
 }
 
 class _TrailerPlayerState extends State<TrailerPlayer> {
   YoutubePlayerController? youtubePlayerController;
-  bool? youtubePlayerIsReadyAndNotNull;
   String? videoKey;
 
   @override
@@ -28,26 +24,18 @@ class _TrailerPlayerState extends State<TrailerPlayer> {
   }
 
   void initializeTrailer() async {
-    print("initializer Trailer Called");
     String movieID = widget.movieID;
     final movieProvider = Provider.of<MovieProvider>(context, listen: false);
-    print("Provider Called");
     videoKey = await movieProvider.getMovieTrailer(movieID);
-    print("Key : $videoKey");
     bool isInternetAvailable = await InternetConnectionChecker().hasConnection;
-
-    if (videoKey!.isEmpty || videoKey == "") {
-      print("Dar-asal Muamlaat Khrab hain");
-      print("Movie ID : ${widget.movieID} \n video key: $videoKey");
+    if (widget.movieID.isEmpty || videoKey!.isEmpty) {
       Utils.showErrorToast("No trailer available");
       return;
     }
     if (!isInternetAvailable) {
-      Utils.showErrorToast("No Internet connection!");
+      Utils.showErrorToast("No internet connection!");
       return;
     }
-
-    print("Before Initializing the controller");
     // Initializing the Controller
     youtubePlayerController = YoutubePlayerController(
       initialVideoId: videoKey!,
@@ -56,53 +44,36 @@ class _TrailerPlayerState extends State<TrailerPlayer> {
         mute: false,
       ),
     );
-
-    setState(() {});
-    youtubePlayerIsReadyAndNotNull = youtubePlayerController != null &&
-        youtubePlayerController!.value.isReady;
-    print("After initializing the controller");
     // Notify the UI to rebuild itself!
-    if (youtubePlayerIsReadyAndNotNull!) {
-      print("Youtube Player is Ready and not null");
-      setState(() {
-        youtubePlayerIsReadyAndNotNull = true;
-      });
-      print("After Setstate");
-    }
+    setState(() {});
   }
 
   @override
   void dispose() {
-    if (youtubePlayerController != null) {
-      youtubePlayerController!.dispose();
-    }
     super.dispose();
+    youtubePlayerController!.dispose();
   }
 
+  bool showVideo = false;
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Stack(
-        children: [
-          if (youtubePlayerIsReadyAndNotNull!)
-            YoutubePlayer(
-              controller: youtubePlayerController!,
-              aspectRatio: double.infinity,
-            ),
-          if (youtubePlayerIsReadyAndNotNull!)
-            IconButton(
-              onPressed: widget.onIconPressed,
-              icon: const Icon(
-                Icons.clear,
-                color: Colors.black,
-              ),
-            ),
-          if (youtubePlayerIsReadyAndNotNull == false)
-            const CircularProgressIndicator(
-              color: Colors.blue,
-            )
-        ],
-      ),
+    return Stack(
+      children: [
+        if (youtubePlayerController != null &&
+            !youtubePlayerController!.value.isReady)
+          YoutubePlayer(
+            controller: youtubePlayerController!,
+            aspectRatio: 0.6,
+          ),
+        IconButton(
+          onPressed: () {
+            setState(() {
+              showVideo = false;
+            });
+          },
+          icon: const Icon(Icons.clear),
+        ),
+      ],
     );
   }
 }

@@ -4,4 +4,5 @@ class RoutesNames {
   static const String movieSearch = 'search';
   static const String movieDetails = 'details';
   static const String movieTicket = 'ticket';
+  static const String movieTrailer = 'trailer';
 }
