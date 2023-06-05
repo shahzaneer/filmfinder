@@ -38,7 +38,11 @@ class _MovieOverviewState extends State<MovieOverview> {
       children: [
         const Text(
           "  Generes",
-          style: TextStyle(color: Colors.black, fontSize: 18),
+          style: TextStyle(
+              color: Colors.black, fontSize: 18, fontWeight: FontWeight.w600),
+        ),
+        Divider(
+          color: Colors.grey.shade50,
         ),
         Consumer<MovieProvider>(
           builder: (context, value, child) {
@@ -48,15 +52,22 @@ class _MovieOverviewState extends State<MovieOverview> {
             );
           },
         ),
+        const SizedBox(
+          height: 20,
+        ),
         const Text(
           "  Overview",
-          style: TextStyle(color: Colors.black, fontSize: 18),
+          style: TextStyle(
+              color: Colors.black, fontSize: 18, fontWeight: FontWeight.w600),
+        ),
+        Divider(
+          color: Colors.grey.shade50,
         ),
         SizedBox(
-          height: height * 0.01,
+          height: height * 0.001,
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 8.0),
+          padding: const EdgeInsets.only(left: 12.0, right: 12, bottom: 12),
           child: Text(
             "${widget.movie.overview}",
             style: const TextStyle(color: Colors.grey, fontSize: 16),
