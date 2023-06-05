@@ -1,4 +1,3 @@
-import 'dart:js';
 
 import 'package:filmfinder_app/models/movie_model.dart';
 import 'package:filmfinder_app/routes/route_names.dart';
@@ -38,7 +37,6 @@ class Routes {
             movie: settings.arguments as MovieModel,
           ),
         );
-
       default:
         return MaterialPageRoute(
           builder: (context) {
