@@ -2,8 +2,6 @@ import 'package:filmfinder_app/models/movie_model.dart';
 import 'package:filmfinder_app/utils/utils.dart';
 import 'package:filmfinder_app/view_models/movie_providers.dart';
 import 'package:filmfinder_app/views/movie_detail_screen/widgets/genere_tag.dart';
-import 'package:filmfinder_app/views/movie_detail_screen/widgets/movie_overview.dart';
-import 'package:filmfinder_app/views/movie_detail_screen/widgets/movie_poster.dart';
 import 'package:filmfinder_app/views/movie_detail_screen/widgets/trailer_player.dart';
 import 'package:flutter/material.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -48,29 +46,24 @@ class _MovieTrailerScreenState extends State<MovieTrailerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
         actions: [
-          playTrailer
-              ? IconButton(
-                  onPressed: () {
-                    setState(() {
-                      playTrailer = false;
-                    });
-                  },
-                  icon: const Icon(
-                    Icons.clear,
-                    color: Colors.white,
-                  ),
-                )
-              : const SizedBox(
-                  height: 0,
-                )
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            icon: const Icon(
+              Icons.clear,
+              color: Colors.white,
+            ),
+          ),
         ],
         elevation: 0,
         title: const Text(
-          'Watch',
+          'Trailer',
           style: TextStyle(
             color: Colors.white,
             fontSize: 22,
@@ -82,19 +75,13 @@ class _MovieTrailerScreenState extends State<MovieTrailerScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            playTrailer
-                ? TrailerPlayer(
-                    movieID: widget.movie.id,
-                  )
-                : MoviePoster(
-                    movie: widget.movie,
-                    showTrailer: showTrailer,
-                  ),
-            const Divider(
-              color: Colors.black,
+            TrailerPlayer(
+              movieID: widget.movie.id,
+            ),
+            Divider(
+              color: Colors.grey.shade50,
               thickness: 0.2,
             ),
-            MovieOverview(movie: widget.movie),
           ],
         ),
       ),

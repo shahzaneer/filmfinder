@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 
 class MoviePoster extends StatelessWidget {
   final MovieModel movie;
-  final Function showTrailer;
 
   //! Sample data For Widget Building
   // MovieModel movie = MovieModel(
@@ -21,7 +20,6 @@ class MoviePoster extends StatelessWidget {
   const MoviePoster({
     Key? key,
     required this.movie,
-    required this.showTrailer,
   }) : super(key: key);
 
   @override
@@ -104,7 +102,7 @@ class MoviePoster extends StatelessWidget {
                   ),
                   child: CupertinoButton(
                     onPressed: () {
-                      showTrailer();
+                      Navigator.pushNamed(context, RoutesNames.movieTrailer, arguments: movie);
                     },
                     color: Colors.transparent,
                     borderRadius: BorderRadius.circular(10),

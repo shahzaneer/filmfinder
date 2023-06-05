@@ -63,7 +63,7 @@ class _TrailerPlayerState extends State<TrailerPlayer> {
             !youtubePlayerController!.value.isReady)
           YoutubePlayer(
             controller: youtubePlayerController!,
-            aspectRatio: 0.6,
+            aspectRatio: 1,
           ),
         IconButton(
           onPressed: () {

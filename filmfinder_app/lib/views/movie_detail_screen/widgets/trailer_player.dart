@@ -46,7 +46,6 @@ class _TrailerPlayerState extends State<TrailerPlayer> {
     );
     // Notify the UI to rebuild itself!
     setState(() {});
-
   }
 
   @override
@@ -58,23 +57,47 @@ class _TrailerPlayerState extends State<TrailerPlayer> {
   bool showVideo = false;
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        if (youtubePlayerController != null &&
-            !youtubePlayerController!.value.isReady)
-          YoutubePlayer(
-            controller: youtubePlayerController!,
-            aspectRatio: 0.6,
-          ),
-        IconButton(
-          onPressed: () {
-            setState(() {
-              showVideo = false;
-            });
-          },
-          icon: const Icon(Icons.clear),
+    if (youtubePlayerController != null &&
+        !youtubePlayerController!.value.isReady) {
+      return YoutubePlayerBuilder(
+        player: YoutubePlayer(
+          controller: youtubePlayerController!,
+          aspectRatio: 0.6,
         ),
-      ],
-    );
+        builder: (context, player) {
+          return Column(
+            children: [
+              // some widgets
+              player,
+              //some other widgets
+            ],
+          );
+        },
+      );
+    } else {
+      return const CircularProgressIndicator(
+        color: Colors.blue,
+      );
+    }
   }
 }
+
+
+// Stack(
+//       children: [
+//         if (youtubePlayerController != null &&
+//             !youtubePlayerController!.value.isReady)
+//           YoutubePlayer(
+//             controller: youtubePlayerController!,
+//             aspectRatio: 0.6,
+//           ),
+//         IconButton(
+//           onPressed: () {
+//             setState(() {
+//               showVideo = false;
+//             });
+//           },
+//           icon: const Icon(Icons.clear),
+//         ),
+//       ],
+//     );
